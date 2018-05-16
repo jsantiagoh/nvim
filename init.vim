@@ -83,6 +83,9 @@ Plug 'zchee/deoplete-go', { 'do': 'make', 'for': 'go'}
 " Vue
 Plug 'posva/vim-vue', { 'for': 'vue' }
 
+" Fish
+Plug 'dag/vim-fish', { 'for': 'fish' }
+
 " Docker
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
@@ -121,7 +124,7 @@ set hidden
 
 set history=1000
 
-" set relativenumber number
+set relativenumber number
 
 " Automatically update the content of the file when changed somewhere else
 set autoread
