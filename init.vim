@@ -9,7 +9,7 @@
 packadd minpac
 
 call minpac#init()
-" " Follow the pope
+" Follow the pope
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-surround')
@@ -17,44 +17,44 @@ call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-vinegar')
 call minpac#add('tpope/vim-sensible')
 
-" " Automatically insert the closing symbol
+" Automatically insert the closing symbol
 call minpac#add('jiangmiao/auto-pairs')
 
-" " Vim Airline
+" Vim Airline
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
 
-" " FZF
+" FZF
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
 call minpac#add('junegunn/fzf.vim')
 
-" " Git
+" Git
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('airblade/vim-gitgutter')
 call minpac#add('vim-scripts/gitignore')
 
-" " Close windows with <Leader>c
+" Close windows with <Leader>c
 call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
 
-" " File navigator
+" File navigator
 call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
 call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
 
 call minpac#add('ryanoasis/vim-devicons')
 
-" " Dash
+" Dash
 call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
 
-" " EasyMotion
-" " with <Leader><Leader>s
+" EasyMotion
+" with <Leader><Leader>s
 call minpac#add('easymotion/vim-easymotion')
 
-" " Autoformat
+" Autoformat
 call minpac#add('Chiel92/vim-autoformat')
 
-" " Enable autocompletion based on types
-" " https://github.com/Shougo/deoplete.nvim
-" " This requires python3
+" Enable autocompletion based on types
+" https://github.com/Shougo/deoplete.nvim
+" This requires python3
 if has('nvim')
   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
 else
@@ -67,25 +67,25 @@ let g:deoplete#enable_at_startup = 1
 call minpac#add('SirVer/ultisnips')
 call minpac#add('honza/vim-snippets')
 
-" " Go
+" Go
 call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
 
-" " Deoplete autocompletion for Go
-" " Requires deoplete
-" " https://github.com/zchee/deoplete-go
-" " Requires https://github.com/nsf/gocode
+" Deoplete autocompletion for Go
+" Requires deoplete
+" https://github.com/zchee/deoplete-go
+" Requires https://github.com/nsf/gocode
 call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
-" " Vue
+" Vue
 call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
-" " Fish
+" Fish
 call minpac#add('dag/vim-fish', { 'for': 'fish' })
 
-" " Docker
+" Docker
 call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
 
-" " Themes
+" Themes
 call minpac#add('morhetz/gruvbox')
 call minpac#add('ayu-theme/ayu-vim')
 call minpac#add('chriskempson/base16-vim')
@@ -93,7 +93,7 @@ call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('altercation/vim-colors-solarized')
 call minpac#add('jsantiagoh/vim-colors-plain')
 
-" " }}}
+" }}}
 
 " System Settings ============================================{{{
 set nocompatible
@@ -162,6 +162,9 @@ let g:mapleader = " "
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+" Live substitutions
+set inccommand=split
 
 " }}}
 
