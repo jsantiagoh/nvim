@@ -91,11 +91,13 @@ Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
 " Themes
 Plug 'morhetz/gruvbox'
-Plug 'altercation/vim-colors-solarized'
-Plug 'rakr/vim-one'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'rakr/vim-one'
 Plug 'ayu-theme/ayu-vim'
 Plug 'chriskempson/base16-vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'altercation/vim-colors-solarized'
+Plug 'jsantiagoh/vim-colors-plain'
 
 call plug#end()
 " }}}
@@ -226,7 +228,7 @@ if (empty($TMUX))
   endif
 endif
 
-" set background=light
+
 function! BackgroundToggle()
     if  &background == "dark"
         set background=light
@@ -236,18 +238,18 @@ function! BackgroundToggle()
 endfunction
 nmap <leader>bt :call BackgroundToggle()<cr>
 
+set background=light
 
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
+" let ayucolor="mirage"  " mirage, light, dark
 " colorscheme ayu
 " colorscheme gruvbox
 colorscheme solarized8
+" colorscheme plain
+" colorscheme plainsol
 
-set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline\ Nerd\ Font\ Complete:h14
 " }}}
 
-" File Settings =============================================={{{
+" File Settings ============================================== {{{
 " Remember the position of the file if available in .vimrc
 autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -348,6 +350,7 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
+" let g:airline_theme='minimalist'
 let g:airline_theme='solarized'
 
 let g:airline_powerline_fonts=1
