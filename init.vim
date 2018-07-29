@@ -14,8 +14,13 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-repeat')
-call minpac#add('tpope/vim-vinegar')
+" call minpac#add('tpope/vim-vinegar')
 call minpac#add('tpope/vim-sensible')
+
+call minpac#add('tpope/vim-obsession')
+
+" Modern database interface for Vim
+call minpac#add('tpope/vim-dadbod')
 
 " Automatically insert the closing symbol
 call minpac#add('jiangmiao/auto-pairs')
@@ -47,7 +52,7 @@ call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
 
 " EasyMotion
 " with <Leader><Leader>s
-call minpac#add('easymotion/vim-easymotion')
+" call minpac#add('easymotion/vim-easymotion')
 
 " Autoformat
 call minpac#add('Chiel92/vim-autoformat')
@@ -76,6 +81,8 @@ call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
 " Requires https://github.com/nsf/gocode
 call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
+call minpac#add('junegunn/vim-easy-align')
+
 " Vue
 call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
@@ -84,6 +91,13 @@ call minpac#add('dag/vim-fish', { 'for': 'fish' })
 
 " Docker
 call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
+
+" Terraform
+call minpac#add('hashivim/vim-terraform')
+
+" Tmux navigation
+call minpac#add('christoomey/vim-tmux-navigator')
+call minpac#add('edkolev/tmuxline.vim')
 
 " Themes
 call minpac#add('morhetz/gruvbox')
@@ -119,7 +133,7 @@ set hidden
 
 set history=1000
 
-set relativenumber number
+" set relativenumber number
 
 " Automatically update the content of the file when changed somewhere else
 set autoread
@@ -172,7 +186,7 @@ set inccommand=split
 " Map the \ to act as  : 
 nnoremap \ :
 
-nnoremap <silent> <C-N> :silent noh<CR>
+nnoremap <silent> <c-n> :silent noh<CR>
 
 " Sane moving between windows  
 nnoremap <c-j> <c-w>j
@@ -239,9 +253,14 @@ set background=light
 " let ayucolor="mirage"  " mirage, light, dark
 " colorscheme ayu
 " colorscheme gruvbox
-colorscheme solarized8
 " colorscheme plain
 " colorscheme plainsol
+
+if $TERM == "screen"
+  colorscheme solarized
+else
+  colorscheme solarized8
+endif
 
 " }}}
 
@@ -260,6 +279,8 @@ au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.jade setlocal expandtab ts=2 sw=2
+
+au BufNewFile,BufRead *.tf setlocal expandtab ts=2 sw=2
 
 augroup filetypedetect
   au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
@@ -346,7 +367,6 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-" let g:airline_theme='minimalist'
 let g:airline_theme='solarized'
 
 let g:airline_powerline_fonts=1
