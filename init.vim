@@ -106,6 +106,9 @@ call minpac#add('chriskempson/base16-vim')
 call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('altercation/vim-colors-solarized')
 call minpac#add('jsantiagoh/vim-colors-plain')
+call minpac#add('jnurmine/Zenburn')
+call minpac#add('jacoborus/tender.vim')
+call minpac#add('ajmwagar/vim-deus')
 
 " }}}
 
@@ -248,19 +251,20 @@ function! BackgroundToggle()
 endfunction
 nmap <leader>bt :call BackgroundToggle()<cr>
 
-set background=light
+set background=dark
 
 " let ayucolor="mirage"  " mirage, light, dark
 " colorscheme ayu
-" colorscheme gruvbox
+colorscheme gruvbox
 " colorscheme plain
 " colorscheme plainsol
+" colorscheme deus
 
-if $TERM == "screen"
-  colorscheme solarized
-else
-  colorscheme solarized8
-endif
+" if $TERM == "screen"
+"   colorscheme solarized
+" else
+"   colorscheme solarized8
+" endif
 
 " }}}
 
@@ -367,7 +371,7 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 
 let g:airline_powerline_fonts=1
 
