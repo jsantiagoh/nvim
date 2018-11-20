@@ -251,20 +251,25 @@ function! BackgroundToggle()
 endfunction
 nmap <leader>bt :call BackgroundToggle()<cr>
 
-set background=dark
+set background=light
 
 " let ayucolor="mirage"  " mirage, light, dark
 " colorscheme ayu
-colorscheme gruvbox
+" colorscheme gruvbox
 " colorscheme plain
 " colorscheme plainsol
 " colorscheme deus
 
-" if $TERM == "screen"
-"   colorscheme solarized
-" else
-"   colorscheme solarized8
-" endif
+if $TERM == "tmux-256color"
+	let base16colorspace=256
+  colorscheme solarized
+	highlight Comment cterm=italic
+else
+  colorscheme solarized8
+endif
+
+" Airline theme
+let g:airline_theme='solarized'
 
 " }}}
 
@@ -371,7 +376,6 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-let g:airline_theme='gruvbox'
 
 let g:airline_powerline_fonts=1
 
