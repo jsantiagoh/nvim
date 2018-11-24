@@ -60,34 +60,37 @@ call minpac#add('Chiel92/vim-autoformat')
 " Enable autocompletion based on types
 " https://github.com/Shougo/deoplete.nvim
 " This requires python3
-" if has('nvim')
-"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-" else
-"   call minpac#add('Shougo/deoplete.nvim')
-"   call minpac#add('roxma/nvim-yarp')
-"   call minpac#add('roxma/vim-hug-neovim-rpc')
-" endif
+if has('nvim')
+  call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+else
+  call minpac#add('Shougo/deoplete.nvim')
+  call minpac#add('roxma/nvim-yarp')
+  call minpac#add('roxma/vim-hug-neovim-rpc')
+endif
 
-" call minpac#add('SirVer/ultisnips')
-" call minpac#add('honza/vim-snippets')
+call minpac#add('SirVer/ultisnips')
+call minpac#add('honza/vim-snippets')
 
 " Go
-" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
+call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
 " Deoplete autocompletion for Go
 " Requires deoplete
 " https://github.com/zchee/deoplete-go
 " Requires https://github.com/nsf/gocode
-" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
+call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
 call minpac#add('junegunn/vim-easy-align')
 
 " Tags
 call minpac#add('ludovicchabant/vim-gutentags')
+call minpac#add('majutsushi/tagbar')
 
 " Python
-" call minpac#add('zchee/deoplete-jedi')
+call minpac#add('zchee/deoplete-jedi')
 call minpac#add('davidhalter/jedi-vim')
 
+" ALE
+call minpac#add('w0rp/ale')
 
 " Vue
 call minpac#add('posva/vim-vue', { 'for': 'vue' })
@@ -187,7 +190,22 @@ set softtabstop=4
 set expandtab
 
 " Live substitutions
-set inccommand=split
+if has('nvim')
+  set inccommand=split
+endif
+
+" Use a specific virtualenv for nvim
+" :h provider-python
+" pyenv install 3.6.6
+" pyenv virtualenv 3.6.6 py3nvim
+" pyenv activate py3nvim
+" pip install pynvim
+" pyenv which python  # Note the path
+" pip install -r requirements.txt
+if has('nvim')
+	let g:python3_host_prog = '/Users/santiago/.pyenv/versions/py3nvim/bin/python'
+endif
+
 
 " }}}
 
@@ -350,7 +368,6 @@ set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 " }}}
-" }}}
 
 " Plugins Configuration ======================================{{{
 
@@ -396,6 +413,13 @@ let g:airline_powerline_fonts=1
 " NERDTree ---------------------------------------------------{{{
 " map <f12> :NERDTreeToggle<CR>
 nmap <leader>e :NERDTreeToggle<CR>
+
+" }}}
+
+
+" Jedi VIM ---------------------------------------------------{{{
+" Disable Completions in jedi-vim
+let g:jedi#completions_enabled = 0
 
 " }}}
 
