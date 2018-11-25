@@ -184,6 +184,13 @@ autocmd FileType help wincmd L
 let mapleader = " "
 let g:mapleader = " "
 
+
+" Map semicolon to colon
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 " Indentation without hard tabs
 set shiftwidth=4
 set softtabstop=4
@@ -285,7 +292,7 @@ set background=light
 " colorscheme deus
 
 if $TERM == "tmux-256color"
-	let base16colorspace=256
+	" let base16colorspace=256
   colorscheme solarized
 	highlight Comment cterm=italic
 else
