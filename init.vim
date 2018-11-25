@@ -186,10 +186,9 @@ let g:mapleader = " "
 
 
 " Map semicolon to colon
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
+map ; :
+" And a double ;; to get the original behaviour
+noremap ;; ;
 
 " Indentation without hard tabs
 set shiftwidth=4
