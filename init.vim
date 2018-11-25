@@ -476,6 +476,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Vim-go -----------------------------------------------------{{{
 "
+let g:go_version_warning = 0
+
 " Go settings
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4 foldmethod=syntax relativenumber number
 
