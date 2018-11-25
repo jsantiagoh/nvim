@@ -67,14 +67,12 @@ else
   call minpac#add('roxma/nvim-yarp')
   call minpac#add('roxma/vim-hug-neovim-rpc')
 endif
-let g:deoplete#enable_at_startup = 1
 
 call minpac#add('SirVer/ultisnips')
 call minpac#add('honza/vim-snippets')
 
 " Go
 call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
-
 " Deoplete autocompletion for Go
 " Requires deoplete
 " https://github.com/zchee/deoplete-go
@@ -82,6 +80,17 @@ call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
 call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
 call minpac#add('junegunn/vim-easy-align')
+
+" Tags
+call minpac#add('ludovicchabant/vim-gutentags')
+call minpac#add('majutsushi/tagbar')
+
+" Python
+call minpac#add('zchee/deoplete-jedi')
+call minpac#add('davidhalter/jedi-vim')
+
+" ALE
+call minpac#add('w0rp/ale')
 
 " Vue
 call minpac#add('posva/vim-vue', { 'for': 'vue' })
@@ -175,13 +184,35 @@ autocmd FileType help wincmd L
 let mapleader = " "
 let g:mapleader = " "
 
+
+" Map semicolon to colon
+nnoremap ; :
+" nnoremap : ;
+" vnoremap ; :
+vnoremap : ;
+
 " Indentation without hard tabs
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 
 " Live substitutions
-set inccommand=split
+if has('nvim')
+  set inccommand=split
+endif
+
+" Use a specific virtualenv for nvim
+" :h provider-python
+" pyenv install 3.6.6
+" pyenv virtualenv 3.6.6 py3nvim
+" pyenv activate py3nvim
+" pip install pynvim
+" pyenv which python  # Note the path
+" pip install -r requirements.txt
+if has('nvim')
+	let g:python3_host_prog = '/Users/santiago/.pyenv/versions/py3nvim/bin/python'
+endif
+
 
 " }}}
 
@@ -251,20 +282,25 @@ function! BackgroundToggle()
 endfunction
 nmap <leader>bt :call BackgroundToggle()<cr>
 
-set background=dark
+set background=light
 
 " let ayucolor="mirage"  " mirage, light, dark
 " colorscheme ayu
-colorscheme gruvbox
+" colorscheme gruvbox
 " colorscheme plain
 " colorscheme plainsol
 " colorscheme deus
 
-" if $TERM == "screen"
-"   colorscheme solarized
-" else
-"   colorscheme solarized8
-" endif
+if $TERM == "tmux-256color"
+	" let base16colorspace=256
+  colorscheme solarized
+	highlight Comment cterm=italic
+else
+  colorscheme solarized8
+endif
+
+" Airline theme
+let g:airline_theme='solarized'
 
 " }}}
 
@@ -339,7 +375,6 @@ set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 " }}}
-" }}}
 
 " Plugins Configuration ======================================{{{
 
@@ -371,7 +406,6 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
-let g:airline_theme='gruvbox'
 
 let g:airline_powerline_fonts=1
 
@@ -389,6 +423,13 @@ nmap <leader>e :NERDTreeToggle<CR>
 
 " }}}
 
+
+" Jedi VIM ---------------------------------------------------{{{
+" Disable Completions in jedi-vim
+let g:jedi#completions_enabled = 0
+
+" }}}
+
 " Deoplete/Neocomplete ---------------------------------------{{{
 if (has("nvim"))
     let g:deoplete#enable_at_startup = 1
@@ -397,6 +438,16 @@ else
     let g:deoplete#enable_at_startup = 0
     let g:neocomplete#enable_at_startup = 1
 endif
+
+" let g:deoplete#enable_at_startup = 0
+" inoremap <silent><expr> <TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ <SID>check_back_space() ? "\<TAB>" :
+" \ deoplete#mappings#manual_complete()
+" function! s:check_back_space() abort "{{{
+" let col = col('.') - 1
+" return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction"}}}
 
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1

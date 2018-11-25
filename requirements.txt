@@ -1,0 +1,5 @@
+pynvim
+neovim
+jedi
+autopep8
+mypy
