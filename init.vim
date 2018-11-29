@@ -15,19 +15,21 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-repeat')
 " call minpac#add('tpope/vim-vinegar')
-call minpac#add('tpope/vim-sensible')
+" call minpac#add('tpope/vim-sensible')
 
-call minpac#add('tpope/vim-obsession')
+" Continuously updated session files
+" call minpac#add('tpope/vim-obsession')
 
 " Modern database interface for Vim
-call minpac#add('tpope/vim-dadbod')
+" call minpac#add('tpope/vim-dadbod')
 
 " Automatically insert the closing symbol
 call minpac#add('jiangmiao/auto-pairs')
 
-" Vim Airline
+" Statusline
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
+" call minpac#add('itchyny/lightline.vim')
 
 " FZF
 call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
@@ -42,13 +44,12 @@ call minpac#add('vim-scripts/gitignore')
 call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
 
 " File navigator
-call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
-call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
-
-call minpac#add('ryanoasis/vim-devicons')
+" call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
+" call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
+" call minpac#add('ryanoasis/vim-devicons')
 
 " Dash
-call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
+" call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
 
 " EasyMotion
 " with <Leader><Leader>s
@@ -60,24 +61,24 @@ call minpac#add('Chiel92/vim-autoformat')
 " Enable autocompletion based on types
 " https://github.com/Shougo/deoplete.nvim
 " This requires python3
-if has('nvim')
-  call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-else
-  call minpac#add('Shougo/deoplete.nvim')
-  call minpac#add('roxma/nvim-yarp')
-  call minpac#add('roxma/vim-hug-neovim-rpc')
-endif
+" if has('nvim')
+"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+" else
+"   call minpac#add('Shougo/deoplete.nvim')
+"   call minpac#add('roxma/nvim-yarp')
+"   call minpac#add('roxma/vim-hug-neovim-rpc')
+" endif
 
-call minpac#add('SirVer/ultisnips')
-call minpac#add('honza/vim-snippets')
+" call minpac#add('SirVer/ultisnips')
+" call minpac#add('honza/vim-snippets')
 
 " Go
-call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
+" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
 " Deoplete autocompletion for Go
 " Requires deoplete
 " https://github.com/zchee/deoplete-go
 " Requires https://github.com/nsf/gocode
-call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
+" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
 call minpac#add('junegunn/vim-easy-align')
 
@@ -86,14 +87,16 @@ call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('majutsushi/tagbar')
 
 " Python
-call minpac#add('zchee/deoplete-jedi')
+" call minpac#add('zchee/deoplete-jedi')
 call minpac#add('davidhalter/jedi-vim')
 
 " ALE
 call minpac#add('w0rp/ale')
 
+" call minpac#add('neoclide/coc.nvim', {'tag': '*', 'do': 'coc#util#install'})
+
 " Vue
-call minpac#add('posva/vim-vue', { 'for': 'vue' })
+" call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
 " Fish
 call minpac#add('dag/vim-fish', { 'for': 'fish' })
@@ -106,7 +109,7 @@ call minpac#add('hashivim/vim-terraform')
 
 " Tmux navigation
 call minpac#add('christoomey/vim-tmux-navigator')
-call minpac#add('edkolev/tmuxline.vim')
+" call minpac#add('edkolev/tmuxline.vim')
 
 " Themes
 call minpac#add('morhetz/gruvbox')
@@ -189,7 +192,7 @@ let g:mapleader = " "
 nnoremap ; :
 " nnoremap : ;
 " vnoremap ; :
-vnoremap : ;
+" vnoremap : ;
 
 " Indentation without hard tabs
 set shiftwidth=4
@@ -210,19 +213,25 @@ endif
 " pyenv which python  # Note the path
 " pip install -r requirements.txt
 if has('nvim')
-	let g:python3_host_prog = '/Users/santiago/.pyenv/versions/py3nvim/bin/python'
+  let g:python_host_prog = '/Users/santiago/.pyenv/versions/pynvim/bin/python'
+  let g:python3_host_prog = '/Users/santiago/.pyenv/versions/py3nvim/bin/python'
 endif
 
+" Show statusline all the time
+set laststatus=2
+
+" Required for displaying the powerline characters in the console
+set encoding=utf-8
 
 " }}}
 
 " Mappings ==================================================={{{
-" Map the \ to act as  : 
+" Map the \ to act as  :
 nnoremap \ :
 
 nnoremap <silent> <c-n> :silent noh<CR>
 
-" Sane moving between windows  
+" Sane moving between windows
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
@@ -282,25 +291,24 @@ function! BackgroundToggle()
 endfunction
 nmap <leader>bt :call BackgroundToggle()<cr>
 
-set background=light
-
 " let ayucolor="mirage"  " mirage, light, dark
 " colorscheme ayu
-" colorscheme gruvbox
 " colorscheme plain
 " colorscheme plainsol
 " colorscheme deus
 
+set background=dark
+colorscheme gruvbox
+" let g:airline_theme='dark_minimal'
+
 if $TERM == "tmux-256color"
-	" let base16colorspace=256
-  colorscheme solarized
-	highlight Comment cterm=italic
+  " let base16colorspace=256
+  " colorscheme solarized
+  highlight Comment cterm=italic
 else
-  colorscheme solarized8
+  " colorscheme solarized8
 endif
 
-" Airline theme
-let g:airline_theme='solarized'
 
 " }}}
 
@@ -378,20 +386,44 @@ set wildignore+=*.orig                           " Merge resolution files
 
 " Plugins Configuration ======================================{{{
 
-" Airline ----------------------------------------------------{{{
-" appear all the time
-set laststatus=2
+" Netrw ----------------------------------------------------{{{
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
-" Required for displaying the powerline characters in the console
-set encoding=utf-8
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+
+nmap <leader>e :Vexplore<CR>
+" }}}
+
+" Lightline ----------------------------------------------------{{{
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+" }}}
+
+" Airline ----------------------------------------------------{{{
 
 " Get rid of the default mode indicator, using airline
 set noshowmode
 
+let g:airline_powerline_fonts=1
+
 " Airline configuration https://github.com/bling/vim-airline
 let g:airline#extensions#tabline#enabled = 1
 
-" set hidden
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -407,11 +439,8 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
 
-let g:airline_powerline_fonts=1
-
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
-
 " let g:airline_left_sep=''
 " let g:airline_right_sep=''
 
@@ -419,14 +448,13 @@ let g:airline_powerline_fonts=1
 
 " NERDTree ---------------------------------------------------{{{
 " map <f12> :NERDTreeToggle<CR>
-nmap <leader>e :NERDTreeToggle<CR>
+" nmap <leader>e :NERDTreeToggle<CR>
 
 " }}}
 
-
 " Jedi VIM ---------------------------------------------------{{{
 " Disable Completions in jedi-vim
-let g:jedi#completions_enabled = 0
+" let g:jedi#completions_enabled = 0
 
 " }}}
 
@@ -585,7 +613,16 @@ augroup END
 " }}}
 
 " ALE --------------------------------------------------------{{{
-  let g:ale_linters = {'go': ['gometalinter' ]}
+
+" let g:ale_linters = {'go': ['gometalinter' ]}
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['autopep8', 'isort'],
+\}
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+
 " }}}
 
 " }}}
