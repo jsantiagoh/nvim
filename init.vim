@@ -290,11 +290,6 @@ function! BackgroundToggle()
 endfunction
 nmap <leader>bt :call BackgroundToggle()<cr>
 
-" let ayucolor="mirage"  " mirage, light, dark
-" colorscheme ayu
-" colorscheme plain
-" colorscheme plainsol
-" colorscheme deus
 
 
 " if $TERM == "tmux-256color"
@@ -309,7 +304,13 @@ let g:gruvbox_italic=1
 set termguicolors
 set background=dark
 colorscheme gruvbox
-" let g:airline_theme='dark_minimal'
+let g:airline_theme='gruvbox'
+
+let ayucolor="mirage"  " mirage, light, dark
+" colorscheme ayu
+" colorscheme plain
+" colorscheme plainsol
+" colorscheme deus
 
 " }}}
 
@@ -439,6 +440,25 @@ nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'c'  : 'C',
+    \ 'i'  : 'I',
+    \ 'ic' : 'I',
+    \ 'ix' : 'I',
+    \ 'n'  : 'N',
+    \ 'ni' : 'N',
+    \ 'no' : 'N',
+    \ 'R'  : 'R',
+    \ 'Rv' : 'R',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ 't'  : 'T',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ }
 
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
