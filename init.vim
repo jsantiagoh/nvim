@@ -213,8 +213,8 @@ endif
 " pyenv which python  # Note the path
 " pip install -r requirements.txt
 if has('nvim')
-  let g:python_host_prog = '/Users/santiago/.pyenv/versions/pynvim/bin/python'
-  let g:python3_host_prog = '/Users/santiago/.pyenv/versions/py3nvim/bin/python'
+  let g:python_host_prog = $HOME . '/.pyenv/versions/pynvim/bin/python'
+  let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
 endif
 
 " Show statusline all the time
