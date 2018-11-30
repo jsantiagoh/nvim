@@ -14,14 +14,9 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-repeat')
-" call minpac#add('tpope/vim-vinegar')
-" call minpac#add('tpope/vim-sensible')
 
 " Continuously updated session files
 " call minpac#add('tpope/vim-obsession')
-
-" Modern database interface for Vim
-" call minpac#add('tpope/vim-dadbod')
 
 " Automatically insert the closing symbol
 call minpac#add('jiangmiao/auto-pairs')
@@ -29,8 +24,8 @@ call minpac#add('jiangmiao/auto-pairs')
 " Statusline
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('vim-airline/vim-airline-themes')
-" call minpac#add('itchyny/lightline.vim')
 
+" Indentation lines
 call minpac#add('Yggdroot/indentLine')
 
 " FZF
@@ -45,7 +40,7 @@ call minpac#add('vim-scripts/gitignore')
 " Close windows with <Leader>c
 call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
 
-" File navigator
+" NERD Tree
 " call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
 " call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
 " call minpac#add('ryanoasis/vim-devicons')
@@ -71,6 +66,7 @@ call minpac#add('Chiel92/vim-autoformat')
 "   call minpac#add('roxma/vim-hug-neovim-rpc')
 " endif
 
+" Snippets
 " call minpac#add('SirVer/ultisnips')
 " call minpac#add('honza/vim-snippets')
 
@@ -95,8 +91,6 @@ call minpac#add('davidhalter/jedi-vim')
 " ALE
 call minpac#add('w0rp/ale')
 
-" call minpac#add('neoclide/coc.nvim', {'tag': '*', 'do': 'coc#util#install'})
-
 " Vue
 " call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
@@ -111,7 +105,7 @@ call minpac#add('hashivim/vim-terraform')
 
 " Tmux navigation
 call minpac#add('christoomey/vim-tmux-navigator')
-" call minpac#add('edkolev/tmuxline.vim')
+call minpac#add('edkolev/tmuxline.vim')
 
 " Themes
 call minpac#add('morhetz/gruvbox')
@@ -267,19 +261,26 @@ cmap w!! w !sudo tee > /dev/null %
 " }}}
 
 " Theme ======================================================{{{
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-endif
-
-if (has("termguicolors"))
+if has("termguicolors")
   set termguicolors
 endif
+
+set background=dark
+
+" Force Italics
+" highlight Comment cterm=italic
+
+let g:gruvbox_italic=1
+let g:deus_italic=1
+let ayucolor="mirage"  " mirage, light, dark
+
+colorscheme gruvbox
+" colorscheme ayu
+" colorscheme plain
+" colorscheme plainsol
+" colorscheme deus
+
+let g:airline_theme='gruvbox'
 
 function! BackgroundToggle()
   if  &background == "dark"
@@ -288,29 +289,8 @@ function! BackgroundToggle()
     set background=dark
   endif
 endfunction
+
 nmap <leader>bt :call BackgroundToggle()<cr>
-
-
-
-" if $TERM == "tmux-256color"
-"   let base16colorspace=256
-" "   colorscheme solarized
-" "   highlight Comment cterm=italic
-" else
-" "   " colorscheme solarized8
-" endif
-
-let g:gruvbox_italic=1
-set termguicolors
-set background=dark
-colorscheme gruvbox
-let g:airline_theme='gruvbox'
-
-let ayucolor="mirage"  " mirage, light, dark
-" colorscheme ayu
-" colorscheme plain
-" colorscheme plainsol
-" colorscheme deus
 
 " }}}
 
@@ -414,6 +394,18 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
+" }}}
+
+" Tmuxline ---------------------------------------------------{{{
+let g:tmuxline_preset = {
+  \ 'a': '#S',
+  \ 'win': '#I #W #F',
+  \ 'cwin': '#I #W #F',
+  \ 'y'    : ['%a', '%b %d', '%R'],
+  \ 'z': '#h ',
+  \ 'options': { 'status-justify': 'left' }
+  \}
+
 " }}}
 
 " Airline ----------------------------------------------------{{{
