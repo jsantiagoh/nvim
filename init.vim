@@ -132,7 +132,7 @@ set clipboard+=unnamed
 
 set directory=~/tmp/vim/swaps
 if exists("&undodir")
-  set undodir=~/tmp/vim/undo
+    set undodir=~/tmp/vim/undo
 endif
 
 " No backups
@@ -197,7 +197,7 @@ set expandtab
 
 " Live substitutions
 if has('nvim')
-  set inccommand=split
+    set inccommand=split
 endif
 
 " Use a specific virtualenv for nvim
@@ -209,8 +209,8 @@ endif
 " pyenv which python  # Note the path
 " pip install -r requirements.txt
 if has('nvim')
-  let g:python_host_prog = $HOME . '/.pyenv/versions/pynvim/bin/python'
-  let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
+    let g:python_host_prog = $HOME . '/.pyenv/versions/pynvim/bin/python'
+    let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
 endif
 
 " Show statusline all the time
@@ -262,10 +262,10 @@ cmap w!! w !sudo tee > /dev/null %
 
 " Theme ======================================================{{{
 if has("termguicolors")
-  set termguicolors
+    set termguicolors
 endif
 
-set background=dark
+" set background=dark
 
 " Force Italics
 " highlight Comment cterm=italic
@@ -274,32 +274,53 @@ let g:gruvbox_italic=1
 let g:deus_italic=1
 let ayucolor="mirage"  " mirage, light, dark
 
-colorscheme gruvbox
+" colorscheme gruvbox
 " colorscheme ayu
 " colorscheme plain
 " colorscheme plainsol
 " colorscheme deus
 
-let g:airline_theme='gruvbox'
+" let g:airline_theme='gruvbox'
+
+" Theme configuration that includes:
+" - colorscheme for light and dark
+" - airline theme for light and dark
+let g:theme_config = {
+            \ "light": {
+            \ "colorscheme" : "solarized8",
+            \ "airline_theme": "solarized"
+            \},
+            \ "dark" : {
+            \ "colorscheme" : "deus",
+            \ "airline_theme": "gruvbox"
+            \},
+            \}
+
+function! SetTheme(theme)
+    let &background=a:theme
+    execute 'colorscheme ' .g:theme_config[a:theme].colorscheme
+    execute 'AirlineTheme ' . g:theme_config[a:theme].airline_theme
+endfunction
 
 function! BackgroundToggle()
-  if  &background == "dark"
-    set background=light
-  elseif &background == "light"
-    set background=dark
-  endif
+    if  &background == "dark"
+        call SetTheme("light")
+    elseif &background == "light"
+        call SetTheme("dark")
+    endif
 endfunction
 
 nmap <leader>bt :call BackgroundToggle()<cr>
 
+call SetTheme("dark")
 " }}}
 
 " File Settings ============================================== {{{
 " Remember the position of the file if available in .vimrc
 autocmd BufReadPost *
-      \ if line("'\"") > 1 && line("'\"") <= line("$") |
-      \   execute "normal! g`\"" |
-      \ endif
+            \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \   execute "normal! g`\"" |
+            \ endif
 
 au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
@@ -313,9 +334,9 @@ au BufNewFile,BufRead *.jade setlocal expandtab ts=2 sw=2
 au BufNewFile,BufRead *.tf setlocal expandtab ts=2 sw=2
 
 augroup filetypedetect
-  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-  au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
-  au BufNewFile,BufRead *.jade setf pug
+    au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+    au BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
+    au BufNewFile,BufRead *.jade setf pug
 augroup END
 
 au FileType nginx setlocal noet ts=4 sw=4 sts=4
@@ -385,26 +406,26 @@ nmap <leader>e :Vexplore<CR>
 
 " Lightline ----------------------------------------------------{{{
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+            \ 'colorscheme': 'jellybeans',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'fugitive#head'
+            \ },
+            \ }
 " }}}
 
 " Tmuxline ---------------------------------------------------{{{
 let g:tmuxline_preset = {
-  \ 'a': '#S',
-  \ 'win': '#I #W #F',
-  \ 'cwin': '#I #W #F',
-  \ 'y'    : ['%a', '%b %d', '%R'],
-  \ 'z': '#h ',
-  \ 'options': { 'status-justify': 'left' }
-  \}
+            \ 'a': '#S',
+            \ 'win': '#I #W #F',
+            \ 'cwin': '#I #W #F',
+            \ 'y'    : ['%a', '%b %d', '%R'],
+            \ 'z': '#h ',
+            \ 'options': { 'status-justify': 'left' }
+            \}
 
 " }}}
 
@@ -433,24 +454,24 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 
 let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'c'  : 'C',
-      \ 'i'  : 'I',
-      \ 'ic' : 'I',
-      \ 'ix' : 'I',
-      \ 'n'  : 'N',
-      \ 'ni' : 'N',
-      \ 'no' : 'N',
-      \ 'R'  : 'R',
-      \ 'Rv' : 'R',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ 't'  : 'T',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ }
+            \ '__' : '-',
+            \ 'c'  : 'C',
+            \ 'i'  : 'I',
+            \ 'ic' : 'I',
+            \ 'ix' : 'I',
+            \ 'n'  : 'N',
+            \ 'ni' : 'N',
+            \ 'no' : 'N',
+            \ 'R'  : 'R',
+            \ 'Rv' : 'R',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ 't'  : 'T',
+            \ 'v'  : 'V',
+            \ 'V'  : 'V',
+            \ '' : 'V',
+            \ }
 
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -473,11 +494,11 @@ let g:airline_mode_map = {
 
 " Deoplete/Neocomplete ---------------------------------------{{{
 if (has("nvim"))
-  let g:deoplete#enable_at_startup = 1
-  let g:neocomplete#enable_at_startup = 0
+    let g:deoplete#enable_at_startup = 1
+    let g:neocomplete#enable_at_startup = 0
 else
-  let g:deoplete#enable_at_startup = 0
-  let g:neocomplete#enable_at_startup = 1
+    let g:deoplete#enable_at_startup = 0
+    let g:neocomplete#enable_at_startup = 1
 endif
 
 " let g:deoplete#enable_at_startup = 0
@@ -525,32 +546,32 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 nmap <f8> :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_type_go = {
-      \ 'ctagstype' : 'go',
-      \ 'kinds'     : [
-      \ 'p:package',
-      \ 'i:imports:1',
-      \ 'c:constants',
-      \ 'v:variables',
-      \ 't:types',
-      \ 'n:interfaces',
-      \ 'w:fields',
-      \ 'e:embedded',
-      \ 'm:methods',
-      \ 'r:constructor',
-      \ 'f:functions'
-      \ ],
-      \ 'sro' : '.',
-      \ 'kind2scope' : {
-      \ 't' : 'ctype',
-      \ 'n' : 'ntype'
-      \ },
-      \ 'scope2kind' : {
-      \ 'ctype' : 't',
-      \ 'ntype' : 'n'
-      \ },
-      \ 'ctagsbin'  : 'gotags',
-      \ 'ctagsargs' : '-sort -silent'
-      \ }
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
 " }}}
 
 " Markdown ---------------------------------------------------{{{
@@ -620,10 +641,10 @@ au FileType go nmap <Leader>r <Plug>(go-rename)
 " endif
 
 augroup go
-  autocmd!
-  autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-  autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-  autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+    autocmd!
+    autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 " }}}
 
@@ -631,9 +652,9 @@ augroup END
 
 " let g:ale_linters = {'go': ['gometalinter' ]}
 let g:ale_fixers = {
-      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'python': ['autopep8', 'isort'],
-      \}
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'python': ['autopep8', 'isort'],
+            \}
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
