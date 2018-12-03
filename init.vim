@@ -160,8 +160,6 @@ set autowrite
 "set sessionoptions=blank,buffers,curdir,folds,help,options,resize,winpos,winsize
 "set viminfo='200,f1,r/mnt/fl,:100,/100,h
 
-set foldlevel=4
-
 " Don't make windows the same size when switching
 set noequalalways
 
@@ -280,8 +278,6 @@ let ayucolor="mirage"  " mirage, light, dark
 " colorscheme plainsol
 " colorscheme deus
 
-" let g:airline_theme='gruvbox'
-
 " Theme configuration that includes:
 " - colorscheme for light and dark
 " - airline theme for light and dark
@@ -291,7 +287,7 @@ let g:theme_config = {
             \ "airline_theme": "solarized"
             \},
             \ "dark" : {
-            \ "colorscheme" : "deus",
+            \ "colorscheme" : "gruvbox",
             \ "airline_theme": "gruvbox"
             \},
             \}
@@ -299,7 +295,12 @@ let g:theme_config = {
 function! SetTheme(theme)
     let &background=a:theme
     execute 'colorscheme ' .g:theme_config[a:theme].colorscheme
-    execute 'AirlineTheme ' . g:theme_config[a:theme].airline_theme
+
+    " Airline
+    let g:airline_theme = g:theme_config[a:theme].airline_theme
+    if exists("*AirlineTheme")
+      execute 'AirlineTheme ' . g:theme_config[a:theme].airline_theme
+    end
 endfunction
 
 function! BackgroundToggle()
