@@ -435,6 +435,16 @@ let g:tmuxline_preset = {
 " Get rid of the default mode indicator, using airline
 set noshowmode
 
+let g:airline_extensions = [
+      \ 'branch',
+      \ 'ale',
+      \ 'fugitiveline',
+      \ 'gutentags',
+      \ 'netrw',
+      \ 'quickfix',
+      \ 'tabline',
+      \ 'tmuxline' ]
+
 let g:airline_powerline_fonts=1
 
 " Airline configuration https://github.com/bling/vim-airline
