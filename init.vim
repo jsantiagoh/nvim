@@ -43,7 +43,9 @@ call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
 " NERD Tree
 " call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
 " call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
-" call minpac#add('ryanoasis/vim-devicons')
+
+" Add nice icons
+call minpac#add('ryanoasis/vim-devicons')
 
 " Dash
 " call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
