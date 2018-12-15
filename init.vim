@@ -1,4 +1,4 @@
-" vim:ts=2:sw=2:et:foldmethod=marker:foldlevel=1
+":vim:ts=2:sw=2:et:foldmethod=marker:foldlevel=1
 
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
@@ -203,6 +203,9 @@ if has('nvim')
     set inccommand=split
 endif
 
+" Don't fold by default
+set foldlevel=11
+
 " Use a specific virtualenv for nvim
 " :h provider-python
 " pyenv install 3.6.6
@@ -256,11 +259,11 @@ map q: :q
 " Fast saving
 nmap <leader>w :w!<cr>
 
-nnoremap <silent> <leader>q :Sayonara<CR>
-
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
+" Toggle between light and dark themes
+nmap <leader>bt <Plug>BackgroundToggle
 " }}}
 
 " Theme ======================================================{{{
@@ -297,47 +300,17 @@ let g:theme_config = {
             \},
             \}
 
-function! SetTheme(theme)
-    let &background=a:theme
-    execute 'colorscheme ' .g:theme_config[a:theme].colorscheme
 
-    " Airline
-    let g:airline_theme = g:theme_config[a:theme].airline_theme
-    if exists("*AirlineTheme")
-      execute 'AirlineTheme ' . g:theme_config[a:theme].airline_theme
-    end
-endfunction
-
-function! BackgroundToggle()
-    if  &background == "dark"
-        call SetTheme("light")
-    elseif &background == "light"
-        call SetTheme("dark")
-    endif
-endfunction
-
-nmap <leader>bt :call BackgroundToggle()<cr>
-
-call SetTheme("dark")
+call theme#settheme("dark")
 " }}}
 
 " File Settings ============================================== {{{
+
 " Remember the position of the file if available in .vimrc
 autocmd BufReadPost *
             \ if line("'\"") > 1 && line("'\"") <= line("$") |
             \   execute "normal! g`\"" |
             \ endif
-
-au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
-au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
-au BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4
-au BufNewFile,BufRead *.yml,*.yaml setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.jade setlocal expandtab ts=2 sw=2
-
-au BufNewFile,BufRead *.tf setlocal expandtab ts=2 sw=2
 
 augroup filetypedetect
     au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
@@ -345,35 +318,9 @@ augroup filetypedetect
     au BufNewFile,BufRead *.jade setf pug
 augroup END
 
-au FileType nginx setlocal noet ts=4 sw=4 sts=4
-
-" scala settings
-autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
-
-" Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
-
-" lua settings
-autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
-
-" Dockerfile settings
-autocmd FileType dockerfile set noexpandtab
-
-" shell/config/systemd settings
-autocmd FileType fstab,systemd set noexpandtab
-autocmd FileType gitconfig,sh,toml set noexpandtab
-
-" python indent
-autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
-
-" toml settings
-au BufRead,BufNewFile MAINTAINERS set ft=toml
-
-" spell check for git commits
-autocmd FileType gitcommit setlocal spell
-
 " Wildmenu completion {{{
 set wildmenu
+
 " set wildmode=list:longest
 set wildmode=list:full
 
@@ -391,296 +338,6 @@ set wildignore+=go/bin                       " Go bin files
 set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-" }}}
-
-" Plugins Configuration ======================================{{{
-
-" Netrw ----------------------------------------------------{{{
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 25
-
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-
-nmap <leader>e :Vexplore<CR>
-" }}}
-
-" Lightline ----------------------------------------------------{{{
-let g:lightline = {
-            \ 'colorscheme': 'jellybeans',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-            \ },
-            \ 'component_function': {
-            \   'gitbranch': 'fugitive#head'
-            \ },
-            \ }
-" }}}
-
-" Tmuxline ---------------------------------------------------{{{
-let g:tmuxline_preset = {
-            \ 'a': '#S',
-            \ 'win': '#I #W #F',
-            \ 'cwin': '#I #W #F',
-            \ 'y'    : ['%a', '%b %d', '%R'],
-            \ 'z': '#h ',
-            \ 'options': { 'status-justify': 'left' }
-            \}
 
 " }}}
 
-" Airline ----------------------------------------------------{{{
-
-" Get rid of the default mode indicator, using airline
-set noshowmode
-
-let g:airline_extensions = [
-      \ 'branch',
-      \ 'ale',
-      \ 'fugitiveline',
-      \ 'gutentags',
-      \ 'netrw',
-      \ 'quickfix',
-      \ 'tabline',
-      \ 'tmuxline' ]
-
-let g:airline_powerline_fonts=1
-
-" Airline configuration https://github.com/bling/vim-airline
-let g:airline#extensions#tabline#enabled = 1
-
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
-let g:airline_mode_map = {
-            \ '__' : '-',
-            \ 'c'  : 'C',
-            \ 'i'  : 'I',
-            \ 'ic' : 'I',
-            \ 'ix' : 'I',
-            \ 'n'  : 'N',
-            \ 'ni' : 'N',
-            \ 'no' : 'N',
-            \ 'R'  : 'R',
-            \ 'Rv' : 'R',
-            \ 's'  : 'S',
-            \ 'S'  : 'S',
-            \ '' : 'S',
-            \ 't'  : 'T',
-            \ 'v'  : 'V',
-            \ 'V'  : 'V',
-            \ '' : 'V',
-            \ }
-
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline_left_sep=''
-" let g:airline_right_sep=''
-
-" }}}
-
-" NERDTree ---------------------------------------------------{{{
-" map <f12> :NERDTreeToggle<CR>
-" nmap <leader>e :NERDTreeToggle<CR>
-
-" }}}
-
-" Jedi VIM ---------------------------------------------------{{{
-" Disable Completions in jedi-vim
-" let g:jedi#completions_enabled = 0
-
-" }}}
-
-" Deoplete/Neocomplete ---------------------------------------{{{
-if (has("nvim"))
-    let g:deoplete#enable_at_startup = 1
-    let g:neocomplete#enable_at_startup = 0
-else
-    let g:deoplete#enable_at_startup = 0
-    let g:neocomplete#enable_at_startup = 1
-endif
-
-" let g:deoplete#enable_at_startup = 0
-" inoremap <silent><expr> <TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ <SID>check_back_space() ? "\<TAB>" :
-" \ deoplete#mappings#manual_complete()
-" function! s:check_back_space() abort "{{{
-" let col = col('.') - 1
-" return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction"}}}
-
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" }}}
-
-" Ctrlp ------------------------------------------------------{{{
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-" }}}
-
-" FZF --------------------------------------------------------{{{
-nnoremap <c-p> :FZF<CR>
-nnoremap <Leader>f :FZF<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>m :Marks<CR>
-" }}}
-
-" The Silver Searcher ----------------------------------------{{{
-let g:ackprg = 'ag --nogroup --nocolor --column'
-" }}}
-
-" Syntastic --------------------------------------------------{{{
-" let g:syntastic_javascript_checkers = ['eslint']
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" }}}
-
-"Tagbar ------------------------------------------------------{{{
-nmap <f8> :TagbarToggle<CR>
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-let g:tagbar_type_go = {
-            \ 'ctagstype' : 'go',
-            \ 'kinds'     : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-            \ ],
-            \ 'sro' : '.',
-            \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-            \ },
-            \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-            \ },
-            \ 'ctagsbin'  : 'gotags',
-            \ 'ctagsargs' : '-sort -silent'
-            \ }
-" }}}
-
-" Markdown ---------------------------------------------------{{{
-" Don't conceal
-let g:markdown_syntax_conceal = 0
-" }}}
-
-" Ultisnippets -----------------------------------------------{{{
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-
-" }}}
-
-" Vim-go -----------------------------------------------------{{{
-"
-let g:go_version_warning = 0
-
-" Go settings
-au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4 foldmethod=syntax relativenumber number
-
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-
-" let g:go_fmt_fail_silently = 0
-let g:go_fmt_command = "goimports"
-" let g:go_autodetect_gopath = 1
-" let g:go_term_enabled = 1
-" let g:go_snippet_engine = "neosnippet"
-" let g:go_highlight_space_tab_error = 0
-" let g:go_highlight_array_whitespace_error = 0
-" let g:go_highlight_trailing_whitespace_error = 0
-" let g:go_highlight_extra_types = 0
-" let g:go_highlight_operators = 0
-" let g:go_highlight_build_constraints = 1
-
-au FileType go nmap <Leader>s <Plug>(go-def-split)
-au FileType go nmap <Leader>v <Plug>(go-def-vertical)
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>l <Plug>(go-metalinter)
-" au FileType go nmap <leader>r  <Plug>(go-run)
-" au FileType go nmap <leader>b  <Plug>(go-build)
-au FileType go nmap <leader>t  <Plug>(go-test)
-" au FileType go nmap <leader>dt  <Plug>(go-test-compile)
-au FileType go nmap <Leader>d <Plug>(go-doc)
-au FileType go nmap <Leader>r <Plug>(go-rename)
-" au FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-
-" run :GoBuild or :GoTestCompile based on the go file
-" function! s:build_go_files()
-"   let l:file = expand('%')
-"   if l:file =~# '^\f\+_test\.go$'
-"     call go#test#Test(0, 1)
-"   elseif l:file =~# '^\f\+\.go$'
-"     call go#cmd#Build(0)
-"   endif
-" endfunction
-" au FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-
-" neovim specific
-" if has('nvim')
-"   au FileType go nmap <leader>rt <Plug>(go-run-tab)
-"   au FileType go nmap <Leader>rs <Plug>(go-run-split)
-"   au FileType go nmap <Leader>rv <Plug>(go-run-vertical)
-" endif
-
-augroup go
-    autocmd!
-    autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-augroup END
-" }}}
-
-" ALE --------------------------------------------------------{{{
-
-" let g:ale_linters = {'go': ['gometalinter' ]}
-let g:ale_fixers = {
-            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \   'python': ['autopep8', 'isort'],
-            \}
-
-" Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 1
-
-" }}}
-
-" Indent Line ------------------------------------------------{{{
-let g:indentLine_char = '▏'
-let g:indentLine_setColors = 1
-let g:indentLine_color_term = 2
-" }}}
-
-" }}}
