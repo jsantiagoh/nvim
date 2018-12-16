@@ -1,4 +1,4 @@
-":vim:ts=2:sw=2:et:foldmethod=marker:foldlevel=1
+" :vim:ts=2:sw=2:et:foldmethod=marker:foldlevel=1
 
 " set runtimepath^=~/.vim runtimepath+=~/.vim/after
 " let &packpath = &runtimepath
@@ -6,122 +6,132 @@
 
 " Plugins ===================================================={{{
 
-packadd minpac
+function! PackInit() abort
+	packadd minpac
 
-call minpac#init()
-" Follow the pope
-call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-repeat')
+	call minpac#init()
 
-" Continuously updated session files
-" call minpac#add('tpope/vim-obsession')
+	" Follow the pope
+	call minpac#add('tpope/vim-commentary')
+	call minpac#add('tpope/vim-unimpaired')
+	call minpac#add('tpope/vim-surround')
+	call minpac#add('tpope/vim-repeat')
 
-" Automatically insert the closing symbol
-call minpac#add('jiangmiao/auto-pairs')
+	" Continuously updated session files
+	" call minpac#add('tpope/vim-obsession')
 
-" Statusline
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('vim-airline/vim-airline-themes')
+	" Automatically insert the closing symbol
+	call minpac#add('jiangmiao/auto-pairs')
 
-" Indentation lines
-call minpac#add('Yggdroot/indentLine')
+	" Statusline
+	call minpac#add('vim-airline/vim-airline')
+	call minpac#add('vim-airline/vim-airline-themes')
 
-" FZF
-call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-call minpac#add('junegunn/fzf.vim')
+	" Indentation lines
+	call minpac#add('Yggdroot/indentLine')
 
-" Git
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('airblade/vim-gitgutter')
-call minpac#add('vim-scripts/gitignore')
+	" FZF
+	call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
+	call minpac#add('junegunn/fzf.vim')
 
-" Close windows with <Leader>c
-call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
+	" Git
+	call minpac#add('tpope/vim-fugitive')
+	call minpac#add('airblade/vim-gitgutter')
+	call minpac#add('vim-scripts/gitignore')
 
-" NERD Tree
-" call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
-" call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
+	" Close windows with <Leader>c
+	call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
 
-" Add nice icons
-call minpac#add('ryanoasis/vim-devicons')
+	" NERD Tree
+	" call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
+	" call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
 
-" Dash
-" call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
+	" Add nice icons
+	call minpac#add('ryanoasis/vim-devicons')
 
-" EasyMotion
-" with <Leader><Leader>s
-" call minpac#add('easymotion/vim-easymotion')
+	" Dash
+	" call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
 
-" Autoformat
-call minpac#add('Chiel92/vim-autoformat')
+	" EasyMotion
+	" with <Leader><Leader>s
+	" call minpac#add('easymotion/vim-easymotion')
 
-" Enable autocompletion based on types
-" https://github.com/Shougo/deoplete.nvim
-" This requires python3
-" if has('nvim')
-"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-" else
-"   call minpac#add('Shougo/deoplete.nvim')
-"   call minpac#add('roxma/nvim-yarp')
-"   call minpac#add('roxma/vim-hug-neovim-rpc')
-" endif
+	" Autoformat
+	call minpac#add('Chiel92/vim-autoformat')
 
-" Snippets
-" call minpac#add('SirVer/ultisnips')
-" call minpac#add('honza/vim-snippets')
+	" Enable autocompletion based on types
+	" https://github.com/Shougo/deoplete.nvim
+	" This requires python3
+	" if has('nvim')
+	"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+	" else
+	"   call minpac#add('Shougo/deoplete.nvim')
+	"   call minpac#add('roxma/nvim-yarp')
+	"   call minpac#add('roxma/vim-hug-neovim-rpc')
+	" endif
 
-" Go
-" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
-" Deoplete autocompletion for Go
-" Requires deoplete
-" https://github.com/zchee/deoplete-go
-" Requires https://github.com/nsf/gocode
-" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
+	" Snippets
+	" call minpac#add('SirVer/ultisnips')
+	" call minpac#add('honza/vim-snippets')
 
-call minpac#add('junegunn/vim-easy-align')
+	" Go
+	" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
+	" Deoplete autocompletion for Go
+	" Requires deoplete
+	" https://github.com/zchee/deoplete-go
+	" Requires https://github.com/nsf/gocode
+	" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
+
+	call minpac#add('junegunn/vim-easy-align')
 
 
-call minpac#add('mustache/vim-mustache-handlebars')
+	call minpac#add('mustache/vim-mustache-handlebars')
 
-" Tags
-call minpac#add('ludovicchabant/vim-gutentags')
-call minpac#add('majutsushi/tagbar')
+	" Tags
+	call minpac#add('ludovicchabant/vim-gutentags')
+	call minpac#add('majutsushi/tagbar')
 
-" Python
-" call minpac#add('zchee/deoplete-jedi')
-call minpac#add('davidhalter/jedi-vim')
+	" Python
+	" call minpac#add('zchee/deoplete-jedi')
+	call minpac#add('davidhalter/jedi-vim')
 
-" ALE
-call minpac#add('w0rp/ale')
+	" ALE
+	call minpac#add('w0rp/ale')
 
-" Vue
-" call minpac#add('posva/vim-vue', { 'for': 'vue' })
+	" Vue
+	" call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
-" Fish
-call minpac#add('dag/vim-fish', { 'for': 'fish' })
+	" Fish
+	call minpac#add('dag/vim-fish', { 'for': 'fish' })
 
-" Docker
-call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
+	" Docker
+	call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
 
-" Terraform
-call minpac#add('hashivim/vim-terraform')
+	" Terraform
+	call minpac#add('hashivim/vim-terraform')
 
-" Tmux navigation
-call minpac#add('christoomey/vim-tmux-navigator')
-call minpac#add('edkolev/tmuxline.vim')
+	" Tmux navigation
+	call minpac#add('christoomey/vim-tmux-navigator')
+	call minpac#add('edkolev/tmuxline.vim')
 
-" Themes
-call minpac#add('morhetz/gruvbox')
-call minpac#add('ayu-theme/ayu-vim')
-call minpac#add('chriskempson/base16-vim')
-call minpac#add('lifepillar/vim-solarized8')
-call minpac#add('altercation/vim-colors-solarized')
-call minpac#add('jsantiagoh/vim-colors-plain')
-call minpac#add('jnurmine/Zenburn')
-call minpac#add('jacoborus/tender.vim')
-call minpac#add('ajmwagar/vim-deus')
+	" Themes
+	call minpac#add('morhetz/gruvbox')
+	call minpac#add('ayu-theme/ayu-vim')
+	call minpac#add('chriskempson/base16-vim')
+	call minpac#add('lifepillar/vim-solarized8')
+	call minpac#add('altercation/vim-colors-solarized')
+	call minpac#add('jsantiagoh/vim-colors-plain')
+	call minpac#add('jnurmine/Zenburn')
+	call minpac#add('jacoborus/tender.vim')
+	call minpac#add('ajmwagar/vim-deus')
+endfunction
+
+" Define user commands for updating/cleaning the plugins.
+" Each of them calls PackInit() to load minpac and register
+" the information of plugins, then performs the task.
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()
 
 " }}}
 
@@ -340,4 +350,3 @@ set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 
 " }}}
-
