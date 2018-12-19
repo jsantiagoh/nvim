@@ -2,6 +2,15 @@ if !exists(':AirlineToggle')
 	finish
 endif
 
+let g:airline_extensions = [
+      \ 'branch',
+      \ 'ale',
+      \ 'fugitiveline',
+      \ 'gutentags',
+      \ 'netrw',
+      \ 'quickfix',
+      \ 'tabline',
+      \ 'tmuxline' ]
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
