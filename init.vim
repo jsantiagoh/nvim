@@ -220,7 +220,7 @@ function! PackInit() abort
 
 
 	" Indentation lines
-	call minpac#add('Yggdroot/indentLine')
+	" call minpac#add('Yggdroot/indentLine')
 
 	" FZF
 	call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
