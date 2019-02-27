@@ -66,6 +66,8 @@ nnoremap ; :
 " vnoremap ; :
 " vnoremap : ;
 
+inoremap kj <Esc>
+
 " Indentation without hard tabs
 set shiftwidth=4
 set softtabstop=4
@@ -162,8 +164,8 @@ let ayucolor="mirage"  " mirage, light, dark
 " - airline theme for light and dark
 let g:theme_config = {
             \ "light": {
-            \ "colorscheme" : "solarized8",
-            \ "airline_theme": "solarized"
+            \ "colorscheme" : "gruvbox",
+            \ "airline_theme": "gruvbox"
             \},
             \ "dark" : {
             \ "colorscheme" : "gruvbox",
@@ -172,7 +174,7 @@ let g:theme_config = {
             \}
 
 
-call theme#settheme("dark")
+call theme#settheme("light")
 
 " Remember the position of the file if available in .vimrc
 autocmd BufReadPost *
@@ -200,6 +202,12 @@ set wildignore+=go/bin                       " Go bin files
 set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
+
+
+
+" autocmd TextChanged,TextChangedI $HOME/Notes/* silent write
+
+
 
 function! PackInit() abort
 	packadd minpac
@@ -309,6 +317,9 @@ function! PackInit() abort
 	" Statusline
 	call minpac#add('vim-airline/vim-airline')
 	call minpac#add('vim-airline/vim-airline-themes')
+
+	" Kite
+	" call minpac#add('kiteco/vim-plugin')
 
 	" Themes
 	call minpac#add('morhetz/gruvbox')
