@@ -262,25 +262,25 @@ function! PackInit() abort
 	" Enable autocompletion based on types
 	" https://github.com/Shougo/deoplete.nvim
 	" This requires python3
-	" if has('nvim')
-	"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-	" else
-	"   call minpac#add('Shougo/deoplete.nvim')
-	"   call minpac#add('roxma/nvim-yarp')
-	"   call minpac#add('roxma/vim-hug-neovim-rpc')
-	" endif
+	if has('nvim')
+	  call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+	else
+	  call minpac#add('Shougo/deoplete.nvim')
+	  call minpac#add('roxma/nvim-yarp')
+	  call minpac#add('roxma/vim-hug-neovim-rpc')
+	endif
 
 	" Snippets
 	" call minpac#add('SirVer/ultisnips')
 	" call minpac#add('honza/vim-snippets')
 
 	" Go
-	" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
+	call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
 	" Deoplete autocompletion for Go
 	" Requires deoplete
 	" https://github.com/zchee/deoplete-go
 	" Requires https://github.com/nsf/gocode
-	" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
+	call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
 	call minpac#add('junegunn/vim-easy-align')
 
@@ -292,7 +292,7 @@ function! PackInit() abort
 	call minpac#add('majutsushi/tagbar')
 
 	" Python
-	" call minpac#add('zchee/deoplete-jedi')
+	call minpac#add('zchee/deoplete-jedi')
 	call minpac#add('davidhalter/jedi-vim')
 
 	" ALE
