@@ -181,16 +181,16 @@ let g:theme_config = {
 call theme#settheme("dark")
 
 
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'gruvbox',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'fugitive#head'
+"       \ },
+"       \ }
 
 " Remember the position of the file if available in .vimrc
 autocmd BufReadPost *
@@ -332,9 +332,9 @@ function! PackInit() abort
 	call minpac#add('edkolev/tmuxline.vim')
 
 	" Statusline
-	" call minpac#add('vim-airline/vim-airline')
-	" call minpac#add('vim-airline/vim-airline-themes')
-	call minpac#add('itchyny/lightline.vim')
+	call minpac#add('vim-airline/vim-airline')
+	call minpac#add('vim-airline/vim-airline-themes')
+	" call minpac#add('itchyny/lightline.vim')
 
 	" Kite
 	" call minpac#add('kiteco/vim-plugin')
