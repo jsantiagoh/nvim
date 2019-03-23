@@ -114,8 +114,12 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-nmap <leader>] :bnext<CR>
-nmap <leader>[ :bprevious<CR>
+" nmap <leader>] :bnext<CR>
+" nmap <leader>[ :bprevious<CR>
+
+nnoremap <tab> :bnext<CR>
+nnoremap <s-tab> :bprevious<CR>
+
 
 " Some useful quickfix shortcuts
 ":cc      see the current error
@@ -164,8 +168,8 @@ let ayucolor="mirage"  " mirage, light, dark
 " - airline theme for light and dark
 let g:theme_config = {
             \ "light": {
-            \ "colorscheme" : "gruvbox",
-            \ "airline_theme": "gruvbox"
+            \ "colorscheme" : "solarized8",
+            \ "airline_theme": "solarized"
             \},
             \ "dark" : {
             \ "colorscheme" : "gruvbox",
@@ -174,7 +178,19 @@ let g:theme_config = {
             \}
 
 
-call theme#settheme("light")
+call theme#settheme("dark")
+
+
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 " Remember the position of the file if available in .vimrc
 autocmd BufReadPost *
@@ -243,11 +259,11 @@ function! PackInit() abort
 	call minpac#add('mhinz/vim-sayonara', { 'on': 'Sayonara' })
 
 	" NERD Tree
-	" call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
-	" call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
+	call minpac#add('scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' })
+	call minpac#add('Xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' })
 
 	" Add nice icons
-	call minpac#add('ryanoasis/vim-devicons')
+	" call minpac#add('ryanoasis/vim-devicons')
 
 	" Dash
 	" call minpac#add('rizzatti/dash.vim', { 'on': 'Dash', 'for': 'go' })
@@ -257,18 +273,18 @@ function! PackInit() abort
 	" call minpac#add('easymotion/vim-easymotion')
 
 	" Autoformat
-	call minpac#add('Chiel92/vim-autoformat')
+	" call minpac#add('Chiel92/vim-autoformat')
 
 	" Enable autocompletion based on types
 	" https://github.com/Shougo/deoplete.nvim
 	" This requires python3
-	if has('nvim')
-	  call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-	else
-	  call minpac#add('Shougo/deoplete.nvim')
-	  call minpac#add('roxma/nvim-yarp')
-	  call minpac#add('roxma/vim-hug-neovim-rpc')
-	endif
+	" if has('nvim')
+	"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+	" else
+	"   call minpac#add('Shougo/deoplete.nvim')
+	"   call minpac#add('roxma/nvim-yarp')
+	"   call minpac#add('roxma/vim-hug-neovim-rpc')
+	" endif
 
 	" Snippets
 	" call minpac#add('SirVer/ultisnips')
@@ -280,7 +296,7 @@ function! PackInit() abort
 	" Requires deoplete
 	" https://github.com/zchee/deoplete-go
 	" Requires https://github.com/nsf/gocode
-	call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
+	" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
 	call minpac#add('junegunn/vim-easy-align')
 
@@ -292,8 +308,9 @@ function! PackInit() abort
 	call minpac#add('majutsushi/tagbar')
 
 	" Python
-	call minpac#add('zchee/deoplete-jedi')
+	" call minpac#add('zchee/deoplete-jedi')
 	call minpac#add('davidhalter/jedi-vim')
+	call minpac#add('ambv/black')
 
 	" ALE
 	call minpac#add('w0rp/ale')
@@ -302,7 +319,7 @@ function! PackInit() abort
 	" call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
 	" Fish
-	call minpac#add('dag/vim-fish', { 'for': 'fish' })
+	" call minpac#add('dag/vim-fish', { 'for': 'fish' })
 
 	" Docker
 	call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
@@ -315,11 +332,15 @@ function! PackInit() abort
 	call minpac#add('edkolev/tmuxline.vim')
 
 	" Statusline
-	call minpac#add('vim-airline/vim-airline')
-	call minpac#add('vim-airline/vim-airline-themes')
+	" call minpac#add('vim-airline/vim-airline')
+	" call minpac#add('vim-airline/vim-airline-themes')
+	call minpac#add('itchyny/lightline.vim')
 
 	" Kite
 	" call minpac#add('kiteco/vim-plugin')
+
+	" Tabline
+	" call minpac#add('mkitt/tabline.vim')
 
 	" Themes
 	call minpac#add('morhetz/gruvbox')

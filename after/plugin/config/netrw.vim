@@ -1,1 +1,1 @@
-nmap <leader>e :Vexplore<CR>
+" nmap <leader>e :Vexplore<CR>
