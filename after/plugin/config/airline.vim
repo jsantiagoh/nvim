@@ -6,7 +6,6 @@ let g:airline_extensions = [
       \ 'branch',
       \ 'ale',
       \ 'fugitiveline',
-      \ 'gutentags',
       \ 'netrw',
       \ 'quickfix',
       \ 'tabline',

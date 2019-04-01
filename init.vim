@@ -178,7 +178,7 @@ let g:theme_config = {
             \}
 
 
-call theme#settheme("dark")
+call theme#settheme("light")
 
 
 " let g:lightline = {
@@ -235,6 +235,10 @@ function! PackInit() abort
 	call minpac#add('tpope/vim-unimpaired')
 	call minpac#add('tpope/vim-surround')
 	call minpac#add('tpope/vim-repeat')
+
+
+	" Language pack
+	call minpac#add('sheerun/vim-polyglot')
 
 	" Continuously updated session files
 	" call minpac#add('tpope/vim-obsession')
@@ -306,6 +310,8 @@ function! PackInit() abort
 	" Tags
 	call minpac#add('ludovicchabant/vim-gutentags')
 	call minpac#add('majutsushi/tagbar')
+	" call minpac#add('liuchengxu/vista.vim')
+
 
 	" Python
 	" call minpac#add('zchee/deoplete-jedi')
@@ -315,6 +321,12 @@ function! PackInit() abort
 	" ALE
 	call minpac#add('w0rp/ale')
 
+	" Editorconfig
+	call minpac#add('editorconfig-vim')
+
+	" COC
+	" call minpac#add('neoclide/coc.nvim', {'do': 'coc#util#install'})
+
 	" Vue
 	" call minpac#add('posva/vim-vue', { 'for': 'vue' })
 
@@ -322,10 +334,10 @@ function! PackInit() abort
 	" call minpac#add('dag/vim-fish', { 'for': 'fish' })
 
 	" Docker
-	call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
+	" call minpac#add('ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' })
 
 	" Terraform
-	call minpac#add('hashivim/vim-terraform')
+	" call minpac#add('hashivim/vim-terraform')
 
 	" Tmux navigation
 	call minpac#add('christoomey/vim-tmux-navigator')
@@ -347,10 +359,10 @@ function! PackInit() abort
 	call minpac#add('ayu-theme/ayu-vim')
 	call minpac#add('chriskempson/base16-vim')
 	call minpac#add('lifepillar/vim-solarized8')
-	call minpac#add('altercation/vim-colors-solarized')
-	call minpac#add('jsantiagoh/vim-colors-plain')
+	" call minpac#add('altercation/vim-colors-solarized')
+	" call minpac#add('jsantiagoh/vim-colors-plain')
 	call minpac#add('jnurmine/Zenburn')
-	call minpac#add('jacoborus/tender.vim')
+	" call minpac#add('jacoborus/tender.vim')
 	call minpac#add('ajmwagar/vim-deus')
 endfunction
 
