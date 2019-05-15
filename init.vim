@@ -155,6 +155,7 @@ endif
 
 let g:gruvbox_italic=1
 let g:deus_italic=1
+let g:nord_italic=1
 let ayucolor="mirage"  " mirage, light, dark
 
 " colorscheme gruvbox
@@ -172,13 +173,13 @@ let g:theme_config = {
             \ "airline_theme": "solarized"
             \},
             \ "dark" : {
-            \ "colorscheme" : "gruvbox",
-            \ "airline_theme": "gruvbox"
+            \ "colorscheme" : "nord",
+            \ "airline_theme": "nord"
             \},
             \}
 
 
-call theme#settheme("light")
+call theme#settheme("dark")
 
 
 " let g:lightline = {
@@ -218,12 +219,6 @@ set wildignore+=go/bin                       " Go bin files
 set wildignore+=go/bin-vagrant               " Go bin-vagrant files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-
-
-
-" autocmd TextChanged,TextChangedI $HOME/Notes/* silent write
-
-
 
 function! PackInit() abort
 	packadd minpac
@@ -279,31 +274,12 @@ function! PackInit() abort
 	" Autoformat
 	" call minpac#add('Chiel92/vim-autoformat')
 
-	" Enable autocompletion based on types
-	" https://github.com/Shougo/deoplete.nvim
-	" This requires python3
-	" if has('nvim')
-	"   call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
-	" else
-	"   call minpac#add('Shougo/deoplete.nvim')
-	"   call minpac#add('roxma/nvim-yarp')
-	"   call minpac#add('roxma/vim-hug-neovim-rpc')
-	" endif
 
 	" Snippets
 	" call minpac#add('SirVer/ultisnips')
 	" call minpac#add('honza/vim-snippets')
 
-	" Go
-	call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
-	" Deoplete autocompletion for Go
-	" Requires deoplete
-	" https://github.com/zchee/deoplete-go
-	" Requires https://github.com/nsf/gocode
-	" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
-
 	call minpac#add('junegunn/vim-easy-align')
-
 
 	call minpac#add('mustache/vim-mustache-handlebars')
 
@@ -312,20 +288,33 @@ function! PackInit() abort
 	call minpac#add('majutsushi/tagbar')
 	" call minpac#add('liuchengxu/vista.vim')
 
+	" Editorconfig
+	" call minpac#add('editorconfig-vim')
 
-	" Python
-	" call minpac#add('zchee/deoplete-jedi')
-	call minpac#add('davidhalter/jedi-vim')
-	call minpac#add('ambv/black')
+	" Tmux navigation
+	call minpac#add('christoomey/vim-tmux-navigator')
+	" call minpac#add('edkolev/tmuxline.vim')
+
+	" Statusline
+	call minpac#add('vim-airline/vim-airline')
+	call minpac#add('vim-airline/vim-airline-themes')
+	" call minpac#add('itchyny/lightline.vim')
+
+	" Tabline
+	" call minpac#add('mkitt/tabline.vim')
+
+	" Languages & Syntax
+	" ------------------
+	" LSP
 
 	" ALE
 	call minpac#add('w0rp/ale')
+	" call minpac#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh'})
 
-	" Editorconfig
-	call minpac#add('editorconfig-vim')
-
-	" COC
-	" call minpac#add('neoclide/coc.nvim', {'do': 'coc#util#install'})
+	" Enable autocompletion based on types
+	" https://github.com/Shougo/deoplete.nvim
+	" This requires python3
+	" call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
 
 	" Vue
 	" call minpac#add('posva/vim-vue', { 'for': 'vue' })
@@ -339,30 +328,30 @@ function! PackInit() abort
 	" Terraform
 	" call minpac#add('hashivim/vim-terraform')
 
-	" Tmux navigation
-	call minpac#add('christoomey/vim-tmux-navigator')
-	call minpac#add('edkolev/tmuxline.vim')
+	" Python
+	" call minpac#add('zchee/deoplete-jedi')
+	call minpac#add('davidhalter/jedi-vim')
+	call minpac#add('ambv/black')
 
-	" Statusline
-	call minpac#add('vim-airline/vim-airline')
-	call minpac#add('vim-airline/vim-airline-themes')
-	" call minpac#add('itchyny/lightline.vim')
-
-	" Kite
-	" call minpac#add('kiteco/vim-plugin')
-
-	" Tabline
-	" call minpac#add('mkitt/tabline.vim')
+	" Go
+	" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
+	" Deoplete autocompletion for Go
+	" Requires deoplete
+	" https://github.com/zchee/deoplete-go
+	" Requires https://github.com/nsf/gocode
+	" call minpac#add('zchee/deoplete-go', { 'do': 'make', 'for': 'go'})
 
 	" Themes
+	" ------
 	call minpac#add('morhetz/gruvbox')
 	call minpac#add('ayu-theme/ayu-vim')
 	call minpac#add('chriskempson/base16-vim')
 	call minpac#add('lifepillar/vim-solarized8')
+	call minpac#add('arcticicestudio/nord-vim')
 	" call minpac#add('altercation/vim-colors-solarized')
 	" call minpac#add('jsantiagoh/vim-colors-plain')
 	call minpac#add('jnurmine/Zenburn')
-	" call minpac#add('jacoborus/tender.vim')
+	call minpac#add('jacoborus/tender.vim')
 	call minpac#add('ajmwagar/vim-deus')
 endfunction
 
