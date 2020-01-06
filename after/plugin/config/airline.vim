@@ -8,8 +8,8 @@ let g:airline_extensions = [
       \ 'fugitiveline',
       \ 'netrw',
       \ 'quickfix',
-      \ 'tabline',
-      \ 'tmuxline' ]
+      \ 'tabline' ]
+
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3

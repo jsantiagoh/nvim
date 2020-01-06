@@ -173,8 +173,8 @@ let g:theme_config = {
             \ "airline_theme": "solarized"
             \},
             \ "dark" : {
-            \ "colorscheme" : "nord",
-            \ "airline_theme": "nord"
+            \ "colorscheme" : "gruvbox",
+            \ "airline_theme": "gruvbox"
             \},
             \}
 
@@ -246,8 +246,11 @@ function! PackInit() abort
 	" call minpac#add('Yggdroot/indentLine')
 
 	" FZF
-	call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-	call minpac#add('junegunn/fzf.vim')
+	" call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
+	" call minpac#add('junegunn/fzf.vim')
+
+	" vim-clap
+	call minpac#add('liuchengxu/vim-clap')
 
 	" Git
 	call minpac#add('tpope/vim-fugitive')
