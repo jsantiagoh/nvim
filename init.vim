@@ -90,7 +90,7 @@ set foldlevel=11
 " pyenv which python  # Note the path
 " pip install -r requirements.txt
 if has('nvim')
-    let g:python_host_prog = $HOME . '/.pyenv/versions/pynvim/bin/python'
+    " let g:python_host_prog = $HOME . '/.pyenv/versions/pynvim/bin/python'
     let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
 endif
 
@@ -179,8 +179,7 @@ let g:theme_config = {
             \}
 
 
-call theme#settheme("dark")
-
+call theme#settheme("light")
 
 " let g:lightline = {
 "       \ 'colorscheme': 'gruvbox',
@@ -287,9 +286,9 @@ function! PackInit() abort
 	call minpac#add('mustache/vim-mustache-handlebars')
 
 	" Tags
-	call minpac#add('ludovicchabant/vim-gutentags')
-	call minpac#add('majutsushi/tagbar')
-	" call minpac#add('liuchengxu/vista.vim')
+	" call minpac#add('ludovicchabant/vim-gutentags')
+	" call minpac#add('majutsushi/tagbar')
+	call minpac#add('liuchengxu/vista.vim')
 
 	" Editorconfig
 	" call minpac#add('editorconfig-vim')
@@ -309,9 +308,10 @@ function! PackInit() abort
 	" Languages & Syntax
 	" ------------------
 	" LSP
+	call minpac#add('neoclide/coc.nvim', { 'branch': 'release' })
 
 	" ALE
-	call minpac#add('w0rp/ale')
+	" call minpac#add('w0rp/ale')
 	" call minpac#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh'})
 
 	" Enable autocompletion based on types
@@ -333,8 +333,8 @@ function! PackInit() abort
 
 	" Python
 	" call minpac#add('zchee/deoplete-jedi')
-	call minpac#add('davidhalter/jedi-vim')
-	call minpac#add('ambv/black')
+	" call minpac#add('davidhalter/jedi-vim')
+	" call minpac#add('ambv/black')
 
 	" Go
 	" call minpac#add('fatih/vim-go', { 'do': 'GoInstallBinaries' , 'for': 'go' })
