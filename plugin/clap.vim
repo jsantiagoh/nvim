@@ -1,1 +1,1 @@
-let g:clap_theme = 'solarized8_low'
+let g:clap_theme = 'solarized_light'
