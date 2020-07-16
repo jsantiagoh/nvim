@@ -156,7 +156,7 @@ endif
 let g:gruvbox_italic=1
 let g:deus_italic=1
 let g:nord_italic=1
-let ayucolor="mirage"  " mirage, light, dark
+let ayucolor="light"  " mirage, light, dark
 
 " colorscheme gruvbox
 " colorscheme ayu
@@ -169,12 +169,12 @@ let ayucolor="mirage"  " mirage, light, dark
 " - airline theme for light and dark
 let g:theme_config = {
             \ "light": {
-            \ "colorscheme" : "solarized8",
-            \ "airline_theme": "solarized"
+            \ "colorscheme" : "ayu",
+            \ "airline_theme": "ayu"
             \},
             \ "dark" : {
-            \ "colorscheme" : "gruvbox",
-            \ "airline_theme": "gruvbox"
+            \ "colorscheme" : "ayu",
+            \ "airline_theme": "ayu_mirage"
             \},
             \}
 
