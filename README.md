@@ -15,7 +15,7 @@ This setup uses [minpac](https://github.com/k-takata/minpac) , after installatio
 
 
 ```
-:call minpac#update()
+:call PackUpdate()
 ```
 
 ### Go Development
